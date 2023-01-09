@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block 'main' %}
+
+<div class="col-md-3">
+  <a href="{% url 'create_post' %}"><button class="btn btn-success">Create Library management</button></a>
+
+</div>
+<br>
+<div class="col-md-12">
+<table class="table table-hover">
+<thead>
+ <tr>
+   <th scope="col">Name</th>
+   <th scope="col">Author</th>
+   <th scope="col">Price</th>
+   <th scope="col">ISBN Number</th>
+   <th scope="col">Category</th>
+   <th scope="col">Is Active</th>
+   <th scope="col">Edit</th>
+   <th scope="col">Delete</th>
+
+ </tr>
+</thead>
+<tbody>
+
+{% for x in data %}
+<tr>
+<th scope="row">{{x.name}}</th>
+<td>{{x.aut}}</td>
+<td>{{x.prc}}</td>
+<td>{{x.isbn}}</td>
+
+
+
+{% if x.cat == 1 %}
+<td>Phychological</td>
+{% elif x.cat == 2 %}
+<td>Philosophical</td>
+{% else %}
+<td>Spiritual</td>
+{% endif %}
+
+{% if x.active == 1 %}
+<td>YES</td>
+{% else %}
+<td>NO</td>
+{% endif %}
+<td><a href="edit/{{x.id}}"><button class="btn btn-warning">Edit</button></a></td>
+<td><a href="delete/{{x.id}}"><button class="btn btn-danger">Delete</button></a></td>
+</tr>
+
+
+</div>
+        
+        {% comment %} 
+          <p>Institute Name:{{name}}</p>
+          <p>Location:{{location}}</p>
+          <p>Module Name:{{module}}</p>
+        {% endcomment %} 
+  
+      {% comment%}
+        {% if x > y %}
+            <p>In if block</p>
+            <p>{{x}} is greater</p>
+               
+        {% else %}
+             <p>In Else block</p>
+             <p>{{y}} is greater</p>
+  
+        {% endif %}
+      {% endcomment%}
+  
+      
+      
+  
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="col-md-5 mt-5">
+    <h4>Filter by Category</h4>
+    <hr>
+    <a href="/udash">All</a><br>
+    <a href="/catfilter/1">Phychological</a><br>
+    <a href="/catfilter/2">Philosophical</a><br>
+    <a href="/catfilter/3">Spiritual</a><br>
+    
+  
+  </div>
+  <div class="col-md-3 mt-5">
+    
+    <h4>Filter Active</h4>
+    <hr>
+    <a href="/actfilter/1">Yes</a><br>
+    <a href="/actfilter/0">No</a><br>
+  
+  </div>
+{% endblock 'main' %}
